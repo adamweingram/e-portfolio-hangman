@@ -1,0 +1,268 @@
+<html>
+<head>
+	<style>
+		* {
+			font-family: 'Pragmata Pro', 'SF Mono', monospace;
+		}
+	
+		#box1{
+			position:absolute;
+			width:100px;
+			height:40px;
+			left:50px;
+			top:50px;
+			border: 1px solid red;
+		}
+		
+		#box2{
+			position:absolute;
+			width:100px;
+			height:40px;
+			left:50px;
+			top:150px;
+			border: 1px solid red;
+		}
+
+		#head {
+			position: absolute;
+			left: 300px;
+		}
+		
+		#body {
+			position: absolute;
+			left: 332px;
+			top: 125px; 
+		}
+
+		#right-arm {
+			position: absolute;
+			left: 290px;
+			top:115px;
+		}
+
+		#left-arm {
+			position: absolute;
+			left: 348px; 
+			top: 120px;
+		}
+
+		#right-leg {
+			position: absolute;
+			left: 255px;
+			top: 199px;
+		}
+
+		#left-leg {
+			position: absolute;
+			left: 340px;
+			top: 200px;
+		}
+
+		.hidden {
+			display: none; 
+		}
+
+		#button-container {
+			position: absolute;
+			top: 400px;
+			margin: auto; 
+			width: 44%;
+		}
+
+		.word-line {
+			margin: 0;
+			padding: 0;
+			width: 100px;
+		}
+
+		#line-container {
+			position: absolute;
+			margin: auto;
+			top: 500px;
+		}
+
+		.line-object {
+			font-size: 50px;
+		}
+	</style>
+		
+	<script>
+		var count = 0;
+		
+		function test(){
+			count = count + 1;
+			
+			var placeholder = document.getElementById("counter");
+			placeholder.innerHTML = count;
+		}
+
+		function hide(id) {
+			document.getElementById(id).classList.add("hidden");
+		}
+
+		function show(id) {
+			document.getElementById(id).classList.remove("hidden");
+		}
+	</script>
+</head>
+
+
+<body>
+	<div id="head" class="body-part">
+		<img src="Head.png">
+	</div>
+	<div id="body" class="body-part">
+		<img src="Body.png">
+	</div>
+	<div id="right-arm" class="body-part">
+		<img src="Right arm.png">
+	</div>
+	<div id="left-arm" class="body-part">
+		<img src="Left arm.png">
+	</div>
+	<div id="left-leg" class="body-part">
+		<img src="left leg.png">
+	</div>
+	<div id="right-leg" class="body-part">
+		<img src="right leg.png">
+	</div>
+
+	<div id="button-container">
+		<button onclick="mistake()">a</button>
+		<button onclick="mistake()">b</button>
+		<button onclick="guessC()">c</button>
+		<button onclick="guessD()">d</button>
+		<button onclick="guessE()">e</button>
+		<button onclick="mistake()">f</button>
+		<button onclick="mistake()">g</button>
+		<button onclick="mistake()">h</button>
+		<button onclick="mistake()">i</button>
+		<button onclick="mistake()">j</button>
+		<button onclick="mistake()">k</button>
+		<button onclick="mistake()">l</button>
+		<button onclick="guessM()">m</button>
+		<button onclick="mistake()">n</button>
+		<button onclick="mistake()">o</button>
+		<button onclick="mistake()">p</button>
+		<button onclick="mistake()">q</button>
+		<button onclick="guessR()">r</button>
+		<button onclick="mistake()">s</button>
+		<button onclick="mistake()">t</button>
+		<button onclick="mistake()">u</button>
+		<button onclick="mistake()">v</button>
+		<button onclick="mistake()">w</button>
+		<button onclick="mistake()">x</button>
+		<button onclick="mistake()">y</button>
+		<button onclick="mistake()">z</button>
+	</div>
+
+	<div id="line-container">
+		<span id="line1" class="line-object">
+			<img src="line.png" class="word-line">
+		</span>
+		<span id="line2" class="line-object">
+			<img src="line.png" class="word-line">
+		</span>
+		<span id="line3" class="line-object">
+			<img src="line.png" class="word-line">
+		</span>
+		<span id="line4" class="line-object">
+			<img src="line.png" class="word-line">
+		</span>
+		<span id="line5" class="line-object">
+			<img src="line.png" class="word-line">
+		</span>
+		<span id="line6" class="line-object">
+			<img src="line.png" class="word-line">
+		</span>
+	</div>
+
+	<script>
+
+		var guesses = 0;
+		var incorrectGuesses = 0;
+
+		// Start off with all the body parts hidden
+		var bodyParts = document.getElementsByClassName("body-part");
+		for (var element in bodyParts) {
+			bodyParts[element].classList.add("hidden");
+		}
+
+		function gameEvaluator() {
+			if (incorrectGuesses >= 6) {
+				alert("Game over!");
+			} else if (guesses - incorrectGuesses == 6) {
+				alert("You won!");
+			}
+
+			if (incorrectGuesses == 1) {
+				document.getElementById("head").classList.remove("hidden");
+			}
+
+			else if (incorrectGuesses == 2) {
+				document.getElementById("body").classList.remove("hidden");
+			}
+
+			else if (incorrectGuesses == 3) {
+				document.getElementById("right-arm").classList.remove("hidden");
+			}
+
+			else if (incorrectGuesses == 4) {
+				document.getElementById("left-arm").classList.remove("hidden");
+			}
+
+			else if (incorrectGuesses == 5) {
+				document.getElementById("left-leg").classList.remove("hidden");
+			}
+
+			else if (incorrectGuesses == 6) {
+				document.getElementById("right-leg").classList.remove("hidden");
+			}
+
+			console.log("Current number of correct guesses: " + (guesses - incorrectGuesses));
+			console.log("Current number of incorrect guesses: " + incorrectGuesses);
+		}
+
+		function guessM() {
+			guesses++;
+			document.getElementById('line1').innerHTML = "M";
+			gameEvaluator();
+		}
+
+		function guessE() {
+			guesses += 2;
+			document.getElementById('line2').innerHTML = "E";
+			document.getElementById('line5').innerHTML = "E";
+			gameEvaluator();
+		}
+		
+		function guessR() {
+			guesses++;
+			document.getElementById('line3').innerHTML = "R";
+			gameEvaluator();
+		}
+
+		function guessC() {
+			guesses++;
+			document.getElementById('line4').innerHTML = "C";
+			gameEvaluator();
+		}
+
+		function guessD() {
+			guesses++;
+			document.getElementById('line6').innerHTML = "D";
+			gameEvaluator();
+		}
+
+		function mistake() {
+			guesses++;
+			incorrectGuesses++;
+			gameEvaluator();
+		}
+	</script>
+</body>
+
+</html>
+
+
+
